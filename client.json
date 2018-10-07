@@ -1,0 +1,39 @@
+{
+      "name": "Client",
+      "script": "client.js",
+      "args":
+      {
+          "hyperion_server":
+          {
+              "ip_address": "Insert.Ip.Address.Here",
+              "port": 19444
+          },
+          "mqtt_broker":
+          {
+              "url": "mqtts://io.adafruit.com",
+              "port": 8883,
+              "username": "InsertYourUsernameHere",
+              "key": "InsertYourKeyHere",
+              "topics":
+              {
+                  "effect_topic": "InsertTopicNameHere",
+                  "color_topic": "InsertTopicNameHere",
+                  "other_topic": "InsertTopicNameHere"
+
+              }
+          },
+          "translation":
+          {
+              "engine": "yandex"
+              "API_key": "InsertYourKeyHere",
+              "from_language": "it"
+          },
+          "kodi_server":
+          {
+            "ip_address": "Insert.Ip.Address.Here",
+            "port": 80,
+            "video_uri": "InsertLink/PathHere"
+          }
+
+      }
+}

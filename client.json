@@ -24,7 +24,7 @@
           },
           "translation":
           {
-              "engine": "yandex"
+              "engine": "yandex",
               "API_key": "InsertYourKeyHere",
               "from_language": "it"
           },

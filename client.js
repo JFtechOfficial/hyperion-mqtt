@@ -231,7 +231,6 @@ fs.readFile('./client.json', 'utf8', function(err, data) {
           language = String(osLocale.sync()).split("_")[0];
         }
 
-        translate.from = language;
         if (language == 'en') {
           result = origin_color.replace(/\s/g, '');
           if (result in colornames) {
@@ -242,6 +241,7 @@ fs.readFile('./client.json', 'utf8', function(err, data) {
             });
           }
         } else {
+          translate.from = language;
           translate(origin_color, {
             to: 'en'
           }).then(function(res) {

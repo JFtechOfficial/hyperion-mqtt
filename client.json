@@ -26,7 +26,7 @@
           {
               "engine": "yandex",
               "API_key": "InsertYourKeyHere",
-              "from_language": "it"
+              "from_language": "en"
           },
           "kodi_server":
           {

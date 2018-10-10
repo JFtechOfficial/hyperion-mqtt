@@ -33,6 +33,11 @@
             "ip_address": "Insert.Ip.Address.Here",
             "port": 80,
             "video_uri": "InsertLink/PathHere"
+          },
+          "custom":
+          {
+            "message": "ON",
+            "target": [255, 255, 255]
           }
 
       }

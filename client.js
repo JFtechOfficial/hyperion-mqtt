@@ -184,7 +184,8 @@ fs.readFile('./client.json', 'utf8', function(err, data) {
   var kodi_port = config.kodi_server.port || 8080;
   var uri = config.kodi_server.video_uri || 'https://youtu.be/dQw4w9WgXcQ';
 
-
+  var customs = config.custom;
+  
   //mqtt client
   var client = mqtt.connect(url, options);
 
@@ -270,13 +271,6 @@ fs.readFile('./client.json', 'utf8', function(err, data) {
           });
         }
 
-        //custom color launcher - turn on the lights
-        else if (message == 'ON') {
-          hyperion.setColor([255, 255, 255], function(err, result) {
-            //console.log('err', err, 'result', result);
-            hyperion.close();
-          });
-        }
 
         //play a video with capture mode - "fireplace mode"
         else if (message == 'PLAY') {
@@ -297,6 +291,39 @@ fs.readFile('./client.json', 'utf8', function(err, data) {
         }
       }
 
+        //custom launcher
+        else if (customs) {
+          for (var c in customs){
+            if (message == c.message){
+              if (c.target instanceof Array){
+                hyperion.setColor(c.target, function(err, result) {
+                  //console.log('err', err, 'result', result);
+                  hyperion.close();
+                });
+              }
+              else if(c.target instanceof String || typeof(c.target) === 'string'){
+                if(c.message == 'clear'){
+                  hyperion.clearall(function(err, result) {
+                    //console.log('err', err, 'result', result);
+                    hyperion.close();
+                  });
+                } else {
+                  hyperion.setEffect(c.target, {}, function(err, result) {
+                    //console.log('err', err, 'result', result);
+                    hyperion.close();
+                  });
+                }
+              }
+            }
+          }
+        }
+        //custom color launcher - turn on the lights
+        //else if (message == 'ON') {
+          //hyperion.setColor([255, 255, 255], function(err, result) {
+            //console.log('err', err, 'result', result);
+            //hyperion.close();
+          //});
+        //}
       //do nothing
       else {
         hyperion.close();

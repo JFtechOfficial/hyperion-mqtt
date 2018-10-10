@@ -1,1 +1,1 @@
-# hyperion-mqtt
+# hyperion-mqtt-subscriber

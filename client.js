@@ -184,8 +184,8 @@ fs.readFile('./client.json', 'utf8', function(err, data) {
   var kodi_port = config.kodi_server.port || 8080;
   var uri = config.kodi_server.video_uri || 'https://youtu.be/dQw4w9WgXcQ';
 
-  var customs = config.custom;
-  
+  var customs = config.custom_actions;
+
   //mqtt client
   var client = mqtt.connect(url, options);
 
@@ -275,7 +275,7 @@ fs.readFile('./client.json', 'utf8', function(err, data) {
         //play a video with capture mode - "fireplace mode"
         else if (message == 'PLAY') {
           hyperion.clearall(function(err, result) {
-            console.log('err', err, 'result', result);
+            //console.log('err', err, 'result', result);
             exec('playonkodi -s ' + kodi_ip_address + ' -p ' + kodi_port + ' ' + uri);
             hyperion.close();
           });
@@ -289,26 +289,25 @@ fs.readFile('./client.json', 'utf8', function(err, data) {
             hyperion.close();
           });
         }
-      }
 
         //custom launcher
         else if (customs) {
-          for (var c in customs){
-            if (message == c.message){
-              if (c.target instanceof Array){
-                hyperion.setColor(c.target, function(err, result) {
+          for (var c in customs) {
+            var custom = customs[c];
+            if (message == custom.message) {
+              if (custom.target instanceof Array) {
+                hyperion.setColor(custom.target, function(err, result) {
                   //console.log('err', err, 'result', result);
                   hyperion.close();
                 });
-              }
-              else if(c.target instanceof String || typeof(c.target) === 'string'){
-                if(c.message == 'clear'){
+              } else if (custom.target instanceof String || typeof(custom.target) === 'string') {
+                if (custom.target == 'clear') {
                   hyperion.clearall(function(err, result) {
                     //console.log('err', err, 'result', result);
                     hyperion.close();
                   });
                 } else {
-                  hyperion.setEffect(c.target, {}, function(err, result) {
+                  hyperion.setEffect(custom.target, {}, function(err, result) {
                     //console.log('err', err, 'result', result);
                     hyperion.close();
                   });
@@ -317,13 +316,8 @@ fs.readFile('./client.json', 'utf8', function(err, data) {
             }
           }
         }
-        //custom color launcher - turn on the lights
-        //else if (message == 'ON') {
-          //hyperion.setColor([255, 255, 255], function(err, result) {
-            //console.log('err', err, 'result', result);
-            //hyperion.close();
-          //});
-        //}
+      }
+
       //do nothing
       else {
         hyperion.close();

@@ -34,7 +34,7 @@
             "port": 80,
             "video_uri": "InsertLink/PathHere"
           },
-          "custom":
+          "custom_actions":
           [
           {
             "message": "ON",

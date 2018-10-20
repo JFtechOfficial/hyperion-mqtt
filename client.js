@@ -263,7 +263,7 @@ fs.readFile('./client.json', 'utf8', function(err, data) {
       }
 
       //clear effects and colors
-      else if (topic == user + '/feeds/' + topics.other_topic) {
+      else if (topic == user + '/feeds/' + topics.misc_topic) {
         if (message == 'OFF') {
           hyperion.clearall(function(err, result) {
             //console.log('err', err, 'result', result);

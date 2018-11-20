@@ -232,6 +232,7 @@ fs.readFile('./client.json', 'utf8', function(err, data) {
           language = String(osLocale.sync()).split("_")[0];
         }
 
+        language = language.toLowerCase();
         if (language == 'en') {
           result = origin_color.replace(/\s/g, '');
           if (result in colornames) {

@@ -1,0 +1,6 @@
+mqtt
+hyperion-client
+translate
+os-locale
+fs
+playonkodi
